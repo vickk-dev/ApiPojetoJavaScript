@@ -1,7 +1,7 @@
 const {Router} = require('express');
-const AuthController = require('src/Controllers/AuthController');
-const validate = require('src/Infrastructure/Express/middlewares/ValidationMiddleware');
-const{registerSchema, loginSchema} = require('src/Infrastructure/Express/schemas/AuthSchemas');
+const AuthController = require('../../controllers/AuthController');
+const validate = require('../validationMiddlewares');
+const{registerSchema, loginSchema} = require('../../schemas/AuthSchemas');
 
 module.exports = (registerUserUsecase, loginUserUsecase) => {
     const router = Router();
@@ -9,6 +9,8 @@ module.exports = (registerUserUsecase, loginUserUsecase) => {
 
     router.post('/register', validate(registerSchema), authController.register.bind(authController));
     router.post('/login', validate(loginSchema), authController.login.bind(authController));
+    router.post('/logout', authenticateToken, authController.logout.bind(authController));
+    router.get('/profile', authenticateToken, authController.profile.bind(authController))
 
     return router;
 };

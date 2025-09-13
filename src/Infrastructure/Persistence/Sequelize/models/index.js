@@ -26,7 +26,7 @@ fs
         file.indexOf('.test.js') === -1);
     })
     .forEach(file =>{
-        constmodel = require(path.join(__dirname, file))(sequelize, Sequelize.DataType);
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataType);
         db[model.name] = model;
     });
 

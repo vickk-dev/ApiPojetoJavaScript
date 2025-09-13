@@ -1,7 +1,7 @@
-const Email = require("../ValueObjects/Email");
-const  Password = require("../ValueObjects/Password");
-const Name = require("../ValueObjects/Name");
-const { UUIDV4 } = require("sequelize");
+const Email = require("./ValueObjects/Email.js");
+const  Password = require("./ValueObjects/Password.js");
+const Name = require("./ValueObjects/Name.js");
+const { uuidv4 } = require("uuid");
 
 class User {
     constructor(name, email, password, id = uuidv4()){
@@ -21,7 +21,7 @@ class User {
     updatePassword(newPassword){
         this.password = new Password(newPassword);
     }
-    toObjecrt(){
+    toObject(){
         return {
             id: this.id,
             name: this.name.value,
